@@ -1,0 +1,45 @@
+
+telegram:
+  bot_token: "PUT_YOUR_TELEGRAM_BOT_TOKEN_HERE"
+  chat_id: "PUT_YOUR_TELEGRAM_CHAT_ID_HERE"
+  polling_interval: 2
+
+monitoring:
+  interval: 10
+  notify_cooldown_seconds: 300
+  cpu_threshold: 75
+  mem_threshold: 85
+  disk_threshold: 90
+  load_threshold: 2.0  # per-core
+
+security:
+  ssh_fail_threshold: 5
+  ssh_ban_minutes: 60
+  watch_exec_paths:
+    - "/tmp"
+    - "/var/tmp"
+    - "/dev/shm"
+  suspicious_patterns:
+    - "curl .*\|.*(bash|sh)"
+    - "wget .*\|.*(bash|sh)"
+    - "bash -c .*base64"
+  whitelist_users:
+    - "root"
+  whitelist_patterns: []
+state:
+  file: "/opt/vps-guardian/state.json"
+
+prometheus:
+  enable: true
+  bind: "127.0.0.1"
+  port: 9877
+
+fail2ban:
+  enable: false
+  jail: "sshd"
+
+cloudflare:
+  enable: false
+  api_token: ""
+  zone_id: ""
+  default_block_notes: "VPS Guardian block"
