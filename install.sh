@@ -159,6 +159,17 @@ fi
 
 # Install service
 cp "$INSTALL_DIR/vps-guardian.service" /etc/systemd/system/
+# Validasi YAML sebelum start
+"$INSTALL_DIR/venv/bin/python" - <<'PY'
+import yaml, sys
+try:
+    yaml.safe_load(open("/opt/vps-guardian/config.yaml"))
+    print("Config OK")
+except Exception as e:
+    print("Config ERROR:", e)
+    sys.exit(1)
+PY
+
 systemctl daemon-reload
 systemctl enable "$SERVICE_NAME"
 systemctl restart "$SERVICE_NAME"
