@@ -19,10 +19,10 @@ security:
     - "/tmp"
     - "/var/tmp"
     - "/dev/shm"
-  suspicious_patterns:
-    - "curl .*\|.*(bash|sh)"
-    - "wget .*\|.*(bash|sh)"
-    - "bash -c .*base64"
+suspicious_patterns:
+  - 'curl .*[|].*(bash|sh)'
+  - 'wget .*[|].*(bash|sh)'
+  - 'bash -c .*base64'
   whitelist_users:
     - "root"
   whitelist_patterns: []
